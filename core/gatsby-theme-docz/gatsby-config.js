@@ -73,11 +73,17 @@ module.exports = opts => {
             config && config.hastPlugins
               ? config.hastPlugins.concat(hastPlugins)
               : hastPlugins,
-          gatsbyRemarkPlugins:
-            config && config.gatsbyRemarkPlugins
-              ? config.gatsbyRemarkPlugins.concat(gatsbyRemarkPlugins)
-              : gatsbyRemarkPlugins,
+          gatsbyRemarkPlugins:[
+            {
+              resolve: `gatsby-remark-images`,
+              options: {
+                maxWidth: 590,
+              },
+              resolve: `gatsby-remark-copy-linked-files`,
+            },
+          ],
           defaultLayouts: {
+            legal: require.resolve('./src/components/Legal/DefaultLayout.tsx'),
             default: path.join(__dirname, 'src/base/Layout.js'),
           },
         },
